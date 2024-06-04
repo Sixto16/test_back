@@ -42,7 +42,9 @@ export class PaymentsService {
     };
 
     async getPayments(): Promise<any> {
-        const response = await this.repository.find();
+        const response = await this.repository.find({
+            relations: ['state', 'country', 'coin']
+        });
         
         return response;
     };
