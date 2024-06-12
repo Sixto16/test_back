@@ -75,7 +75,11 @@ export class PaymentsService {
         }
 
         console.log('asdasd', payment)
-        const response = await this.repository.delete(payment);
+        const response = await this.repository.createQueryBuilder()
+        .delete()
+        .from(Payment)
+        .where("id = :id", { id: id })
+        .execute();
 
         return response;
     };
